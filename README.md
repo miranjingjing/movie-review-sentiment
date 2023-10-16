@@ -1,4 +1,4 @@
-# tweet-sentiment
+# movie-review-sentiment
 Sentiment analysis on movie reviews
 
 ## Installation
