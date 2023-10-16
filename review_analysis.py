@@ -7,7 +7,7 @@ from nltk.stem import SnowballStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB,MultinomialNB,BernoulliNB
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score
 import pickle
 
 data = pd.read_csv('IMDB-Dataset.csv')
@@ -60,11 +60,18 @@ gnb.fit(trainx,trainy)
 mnb.fit(trainx,trainy)
 bnb.fit(trainx,trainy)
 
-# display prediction and accuracy metrics for each model
-print("Prediction/Accuracy Metrics")
+# display prediction metrics for each model
 ypg = gnb.predict(testx)
 ypm = mnb.predict(testx)
 ypb = bnb.predict(testx)
-print("Gaussian = ", accuracy_score(testy,ypg))
-print("Multinomial = ", accuracy_score(testy,ypm))
-print("Bernoulli = ", accuracy_score(testy,ypb))
+
+# accuracy score
+print("Prediction/Accuracy Metrics")
+print("Gaussian Accuracy = ", accuracy_score(testy,ypg))
+print("Multinomial Accuracy= ", accuracy_score(testy,ypm))
+print("Bernoulli Accuracy= ", accuracy_score(testy,ypb))
+
+# f1 score
+print("Gaussian F1 score = ", f1_score(ypg, testy, average="weighted"))
+print("Multinomial F1 score = ", f1_score(ypm, testy, average="weighted"))
+print("Bernoulli F1 score = ", f1_score(ypb, testy, average="weighted"))
